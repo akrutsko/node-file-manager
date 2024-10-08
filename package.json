@@ -1,0 +1,19 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/akrutsko/node-file-manager.git"
+  },
+  "author": "Aliaksei Krutsko",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akrutsko/node-file-manager/issues"
+  },
+  "homepage": "https://github.com/akrutsko/node-file-manager#readme",
+  "description": ""
+}
