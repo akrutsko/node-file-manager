@@ -1,4 +1,5 @@
-import { EOL, cpus, userInfo, arch } from 'node:os';
+import { EOL, arch, cpus, homedir, userInfo } from 'node:os';
+
 import { MESSAGES } from '../constants/messages.js';
 
 export class OsCmd {
@@ -22,7 +23,7 @@ export class OsCmd {
         console.table(cores.map(({ model, speed }) => ({ model, speed: (speed / 1000).toFixed(2) + 'GHz' })));
         break;
       case '--homedir':
-        console.log(userInfo().homedir);
+        console.log(homedir());
         break;
       case '--username':
         console.log(userInfo().username);

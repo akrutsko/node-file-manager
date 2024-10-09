@@ -1,39 +1,48 @@
-import { EOL } from 'node:os';
-import { cwd, stdin as input, stdout as output } from 'node:process';
+import { homedir } from 'node:os';
+import { chdir, cwd, stdin as input, stdout as output } from 'node:process';
 import { createInterface } from 'node:readline';
 
 import { OsCmd } from './commands/index.js';
 import { conductor } from './conductor/conductor.js';
 import { MESSAGES } from './constants/messages.js';
 
-const userName = process.argv.find((arg) => arg.startsWith('--username='))?.split('=')[1] || 'Anonymous';
-console.log(`Welcome to the File Manager, ${userName}!` + EOL);
-console.log(`You are currently in ${cwd()}!` + EOL);
+const userName = process.argv.find((arg) => arg.startsWith('--username='))?.split('=')[1] || 'Reviewer 1';
+console.log(MESSAGES.WELCOME(userName));
 
-const rl = createInterface({ input, output, prompt: 'File Manager> ' });
+try {
+  chdir(homedir());
+} catch {
+  console.log(MESSAGES.FAIL);
+}
+console.log(MESSAGES.CWD(cwd()));
+
+const rl = createInterface({ input, output, prompt: '>' });
 
 rl.on('SIGINT', () => {
-  console.log(EOL + `Thank you for using File Manager, ${userName}, goodbye!`);
+  console.log(MESSAGES.BY(userName));
   process.exit();
 });
 
 rl.on('line', (line) => {
-  if (line === '.exit') {
-    rl.emit('SIGINT');
-  }
-
   const [cmd, ...params] = line.split(' ');
 
   try {
     switch (cmd) {
+      case '':
+        break;
+      case '.exit':
+        rl.emit('SIGINT');
       case 'os':
         conductor.run(new OsCmd(params));
         break;
+      default:
+        console.log(MESSAGES.FAIL);
     }
   } catch {
     console.log(MESSAGES.FAIL);
   }
 
+  console.log(MESSAGES.CWD(cwd()));
   rl.prompt();
 });
 
