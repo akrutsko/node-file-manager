@@ -1,4 +1,4 @@
-import { EOL, cpus } from 'node:os';
+import { EOL, cpus, userInfo, arch } from 'node:os';
 import { MESSAGES } from '../constants/messages.js';
 
 export class OsCmd {
@@ -18,9 +18,17 @@ export class OsCmd {
         break;
       case '--cpus':
         const cores = cpus();
-
         console.log(MESSAGES.CPUS(cores.length));
-        console.table(cores.map((cpu) => ({ model: cpu.model, speed: (cpu.speed / 1000).toFixed(2) + 'GHz' })));
+        console.table(cores.map(({ model, speed }) => ({ model, speed: (speed / 1000).toFixed(2) + 'GHz' })));
+        break;
+      case '--homedir':
+        console.log(userInfo().homedir);
+        break;
+      case '--username':
+        console.log(userInfo().username);
+        break;
+      case '--architecture':
+        console.log(arch());
         break;
       default:
         console.log(MESSAGES.INVALID_INPUT);

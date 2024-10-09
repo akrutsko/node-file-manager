@@ -24,10 +24,14 @@ rl.on('line', (line) => {
 
   const [cmd, ...params] = line.split(' ');
 
-  switch (cmd) {
-    case 'os':
-      conductor.run(new OsCmd(params));
-      break;
+  try {
+    switch (cmd) {
+      case 'os':
+        conductor.run(new OsCmd(params));
+        break;
+    }
+  } catch {
+    console.log(MESSAGES.FAIL);
   }
 
   rl.prompt();
