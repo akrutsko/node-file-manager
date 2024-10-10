@@ -25,12 +25,11 @@ rl.on('SIGINT', () => {
 });
 
 rl.on('line', async (line) => {
-  const [cmd, ...params] = line.split(' ');
-
   if (line === '.exit') {
     rl.emit('SIGINT');
   }
 
+  const [cmd, ...params] = line.split(' ');
   const command = commands[cmd];
 
   try {
