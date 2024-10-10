@@ -2,7 +2,7 @@ import { homedir } from 'node:os';
 import { chdir, cwd, stdin as input, stdout as output } from 'node:process';
 import { createInterface } from 'node:readline';
 
-import { OsCmd } from './commands/index.js';
+import { commands } from './commands/index.js';
 import { conductor } from './conductor/conductor.js';
 import { MESSAGES } from './constants/messages.js';
 
@@ -13,36 +13,35 @@ try {
   chdir(homedir());
 } catch {
   console.log(MESSAGES.FAIL);
+} finally {
+  console.log(MESSAGES.CWD(cwd()));
 }
-console.log(MESSAGES.CWD(cwd()));
 
 const rl = createInterface({ input, output, prompt: '>' });
 
 rl.on('SIGINT', () => {
-  console.log(MESSAGES.BY(userName));
+  console.log(MESSAGES.BYE(userName));
   process.exit();
 });
 
-rl.on('line', (line) => {
+rl.on('line', async (line) => {
   const [cmd, ...params] = line.split(' ');
 
-  try {
-    switch (cmd) {
-      case '':
-        break;
-      case '.exit':
-        rl.emit('SIGINT');
-      case 'os':
-        conductor.run(new OsCmd(params));
-        break;
-      default:
-        console.log(MESSAGES.FAIL);
-    }
-  } catch {
-    console.log(MESSAGES.FAIL);
+  if (line === '.exit') {
+    rl.emit('SIGINT');
   }
 
-  console.log(MESSAGES.CWD(cwd()));
+  const command = commands[cmd];
+
+  try {
+    await conductor.run(command(params));
+  } catch (er) {
+    console.log(er.message); // TODO: remove
+    console.log(MESSAGES.FAIL);
+  } finally {
+    console.log(MESSAGES.CWD(cwd()));
+  }
+
   rl.prompt();
 });
 
