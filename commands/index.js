@@ -1,7 +1,11 @@
+import { CdCmd } from './cd-cmd.js';
+import { LsCmd } from './ls-cmd.js';
 import { OsCmd } from './os-cmd.js';
 import { UpCmd } from './up-cmd.js';
 
 export const commands = {
-  os: (params) => new OsCmd(params),
   up: (params) => new UpCmd(params),
+  cd: (params) => new CdCmd(params),
+  ls: (params) => new LsCmd(params),
+  os: (params) => new OsCmd(params),
 };
