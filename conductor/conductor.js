@@ -1,6 +1,6 @@
 class Conductor {
-  run(command) {
-    command.execute();
+  async run(command) {
+    await command.execute();
   }
 }
 
