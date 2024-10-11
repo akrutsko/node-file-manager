@@ -5,6 +5,7 @@ import { createInterface } from 'node:readline';
 import { commands } from './commands/index.js';
 import { conductor } from './conductor/conductor.js';
 import { MESSAGES } from './constants/messages.js';
+import { parseArgs } from './utils/parse-args.js';
 
 const userName = process.argv.find((arg) => arg.startsWith('--username='))?.split('=')[1] || 'Reviewer 1';
 console.log(MESSAGES.WELCOME(userName));
@@ -29,7 +30,7 @@ rl.on('line', async (line) => {
     rl.emit('SIGINT');
   }
 
-  const [cmd, ...params] = line.split(' ');
+  const [cmd, ...params] = parseArgs(line);
   const command = commands[cmd];
 
   try {
