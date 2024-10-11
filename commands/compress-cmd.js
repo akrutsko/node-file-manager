@@ -1,8 +1,8 @@
 import { createReadStream, createWriteStream } from 'node:fs';
+import { basename, resolve } from 'node:path';
 import { cwd } from 'node:process';
 import { pipeline } from 'node:stream/promises';
 import { createBrotliCompress } from 'node:zlib';
-import { parse, resolve } from 'path';
 
 import { MESSAGES } from '../constants/messages.js';
 
@@ -17,7 +17,7 @@ export class CompressCmd {
       return;
     }
 
-    const sourceFile = parse(this.params[0]).name;
+    const sourceFile = basename(this.params[0]);
     const sourceFilePath = resolve(cwd(), this.params[0]);
     const readable = createReadStream(sourceFilePath);
 
