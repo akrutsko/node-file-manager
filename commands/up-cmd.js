@@ -9,7 +9,7 @@ export class UpCmd {
 
   execute() {
     if (this.params.length) {
-      console.log(MESSAGES.INVALID_INPUT);
+      console.log(MESSAGES.INVALID);
       return;
     }
 

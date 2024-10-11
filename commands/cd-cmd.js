@@ -10,7 +10,7 @@ export class CdCmd {
 
   execute() {
     if (this.params.length !== 1) {
-      console.log(MESSAGES.INVALID_INPUT);
+      console.log(MESSAGES.INVALID);
       return;
     }
 

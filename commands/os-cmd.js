@@ -9,7 +9,7 @@ export class OsCmd {
 
   execute() {
     if (this.params.length !== 1) {
-      console.log(MESSAGES.INVALID_INPUT);
+      console.log(MESSAGES.INVALID);
       return;
     }
 
@@ -32,7 +32,7 @@ export class OsCmd {
         console.log(arch());
         break;
       default:
-        console.log(MESSAGES.INVALID_INPUT);
+        console.log(MESSAGES.INVALID);
     }
   }
 }

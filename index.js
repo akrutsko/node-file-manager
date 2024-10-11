@@ -14,9 +14,8 @@ try {
   chdir(homedir());
 } catch {
   console.log(MESSAGES.FAIL);
-} finally {
-  console.log(MESSAGES.CWD(cwd()));
 }
+console.log(MESSAGES.CWD(cwd()));
 
 const rl = createInterface({ input, output, prompt: '>' });
 
@@ -33,15 +32,18 @@ rl.on('line', async (line) => {
   const [cmd, ...params] = parseArgs(line);
   const command = commands[cmd];
 
-  try {
-    await conductor.run(command(params));
-  } catch (er) {
-    console.log(er.message); // TODO: remove
-    console.log(MESSAGES.FAIL);
-  } finally {
-    console.log(MESSAGES.CWD(cwd()));
+  if (!command) {
+    console.log(MESSAGES.INVALID);
+  } else {
+    try {
+      await conductor.run(command(params));
+    } catch (er) {
+      console.log(er.message); // TODO: remove
+      console.log(MESSAGES.FAIL);
+    }
   }
 
+  console.log(MESSAGES.CWD(cwd()));
   rl.prompt();
 });
 
