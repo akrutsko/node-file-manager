@@ -6,6 +6,7 @@ import { DecompressCmd } from './decompress-cmd.js';
 import { HashCmd } from './hash-cmd.js';
 import { LsCmd } from './ls-cmd.js';
 import { OsCmd } from './os-cmd.js';
+import { RnCmd } from './rn-cmd.js';
 import { UpCmd } from './up-cmd.js';
 
 export const commands = {
@@ -14,6 +15,7 @@ export const commands = {
   ls: (params) => new LsCmd(params),
   cat: (params) => new CatCmd(params),
   add: (params) => new AddCmd(params),
+  rn: (params) => new RnCmd(params),
   os: (params) => new OsCmd(params),
   hash: (params) => new HashCmd(params),
   compress: (params) => new CompressCmd(params),
