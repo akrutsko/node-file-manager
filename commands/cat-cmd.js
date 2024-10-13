@@ -3,8 +3,6 @@ import { EOL } from 'node:os';
 import { resolve } from 'node:path';
 import { cwd, stdout } from 'node:process';
 
-import { pipeline } from 'node:stream/promises';
-
 import { MESSAGES } from '../constants/messages.js';
 
 export class CatCmd {
