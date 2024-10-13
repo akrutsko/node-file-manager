@@ -6,6 +6,7 @@ import { CpCmd } from './cp-cmd.js';
 import { DecompressCmd } from './decompress-cmd.js';
 import { HashCmd } from './hash-cmd.js';
 import { LsCmd } from './ls-cmd.js';
+import { MvCmd } from './mv-cmd.js';
 import { OsCmd } from './os-cmd.js';
 import { RnCmd } from './rn-cmd.js';
 import { UpCmd } from './up-cmd.js';
@@ -18,6 +19,7 @@ export const commands = {
   add: (params) => new AddCmd(params),
   rn: (params) => new RnCmd(params),
   cp: (params) => new CpCmd(params),
+  mv: (params) => new MvCmd(params),
   os: (params) => new OsCmd(params),
   hash: (params) => new HashCmd(params),
   compress: (params) => new CompressCmd(params),
