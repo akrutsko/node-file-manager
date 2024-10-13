@@ -17,12 +17,10 @@ export class DecompressCmd {
       return;
     }
 
-    const sourceFile = basename(this.params[0]);
     const sourceFilePath = resolve(cwd(), this.params[0]);
     const readable = createReadStream(sourceFilePath);
 
-    const destinationFile = parse(sourceFile).name;
-    const destinationFilePath = resolve(cwd(), this.params[1], destinationFile);
+    const destinationFilePath = resolve(cwd(), this.params[1]);
     const writable = createWriteStream(destinationFilePath);
 
     const brotli = createBrotliDecompress();
