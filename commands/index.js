@@ -2,6 +2,7 @@ import { AddCmd } from './add-cmd.js';
 import { CatCmd } from './cat-cmd.js';
 import { CdCmd } from './cd-cmd.js';
 import { CompressCmd } from './compress-cmd.js';
+import { CpCmd } from './cp-cmd.js';
 import { DecompressCmd } from './decompress-cmd.js';
 import { HashCmd } from './hash-cmd.js';
 import { LsCmd } from './ls-cmd.js';
@@ -16,6 +17,7 @@ export const commands = {
   cat: (params) => new CatCmd(params),
   add: (params) => new AddCmd(params),
   rn: (params) => new RnCmd(params),
+  cp: (params) => new CpCmd(params),
   os: (params) => new OsCmd(params),
   hash: (params) => new HashCmd(params),
   compress: (params) => new CompressCmd(params),
