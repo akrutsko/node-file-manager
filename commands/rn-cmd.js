@@ -20,7 +20,7 @@ export class RnCmd {
     const destinationFile = resolve(cwd(), this.params[1]);
 
     if (existsSync(destinationFile)) {
-      throw new Error(`EEXIST: file already exists, ${destinationFile}`);
+      throw new Error(`EEXIST: file already exists, renamefile '${sourceFile}' -> '${destinationFile}'`);
     }
 
     await rename(sourceFile, destinationFile);

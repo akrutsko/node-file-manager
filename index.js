@@ -37,8 +37,8 @@ rl.on('line', async (line) => {
   } else {
     try {
       await conductor.run(command(params));
-    } catch (er) {
-      console.log(er.message); // TODO: remove
+    } catch (err) {
+      console.log(err.message);
       console.log(MESSAGES.FAIL);
     }
   }

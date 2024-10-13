@@ -10,7 +10,7 @@ export class CatCmd {
     this.params = params;
   }
 
-  async execute() {
+  execute() {
     if (this.params.length !== 1) {
       console.log(MESSAGES.INVALID);
       return;
