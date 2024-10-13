@@ -8,6 +8,7 @@ import { HashCmd } from './hash-cmd.js';
 import { LsCmd } from './ls-cmd.js';
 import { MvCmd } from './mv-cmd.js';
 import { OsCmd } from './os-cmd.js';
+import { RmCmd } from './rm-cmd.js';
 import { RnCmd } from './rn-cmd.js';
 import { UpCmd } from './up-cmd.js';
 
@@ -20,6 +21,7 @@ export const commands = {
   rn: (params) => new RnCmd(params),
   cp: (params) => new CpCmd(params),
   mv: (params) => new MvCmd(params),
+  rm: (params) => new RmCmd(params),
   os: (params) => new OsCmd(params),
   hash: (params) => new HashCmd(params),
   compress: (params) => new CompressCmd(params),
